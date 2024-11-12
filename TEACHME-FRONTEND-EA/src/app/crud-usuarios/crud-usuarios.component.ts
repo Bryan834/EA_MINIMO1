@@ -117,3 +117,13 @@ export class CrudUsuariosComponent implements OnInit {
     this.passwordErrorMessage = '';
   }
 }
+
+
+//Explicación del código:
+//loadUsuarios: Carga los usuarios de la base de datos y los almacena en el array usuarios.
+//nextPage: Incrementa el número de página y vuelve a cargar los usuarios.
+//previousPage: Decrementa el número de página y vuelve a cargar los usuarios.
+//submitForm: Comprueba que los campos del formulario son correctos y envía los datos a la base de datos.
+//editUsuario: Copia los datos de un usuario al formulario para poder modificarlos.
+//deleteUsuario: Elimina un usuario de la base de datos.
+//resetForm: Limpia el formulario y reinicia las variables de control.
