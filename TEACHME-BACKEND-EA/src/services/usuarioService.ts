@@ -15,10 +15,7 @@ export const listarUsuarios = async () => {
 
 export const obtenerUsuariosPaginados = async (page: number, limit: number) => {
   const skip = (page - 1) * limit;
-  const usuarios = await Usuario.find()
-    .skip(skip)
-    .limit(limit)
-    .populate('asignaturasImparte');
+  const usuarios = await Usuario.find().skip(skip).limit(limit).populate('asignaturasImparte');
 
   const total = await Usuario.countDocuments();
   return {
