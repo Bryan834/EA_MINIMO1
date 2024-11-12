@@ -81,17 +81,15 @@ export async function eliminarEtiquetaPorNombre(req: Request, res: Response) {
     }
 }
 
-//asignar un usuario a una etiqueta dandole el nombre del usuario
-export async function asignarUsuarioAEtiquetaID(req: Request, res: Response) {
+// Asignar un usuario a una etiqueta por ID de la etiqueta
+export async function asignarUsuarioAEtiquetaPorId(req: Request, res: Response) {
     try {
-        const { _id } = req.params;
-        const { usuarioId } = req.body;
-        const etiqueta = await etiquetaService.asignarUsuarioAEtiquetaID(_id, usuarioId);
-        res.json(etiqueta);
+        const { _id, nombreUsuario } = req.params;  
+        const etiqueta = await etiquetaService.asignarUsuarioAEtiquetaPorId(_id, nombreUsuario);
+        res.status(200).json(etiqueta);  // Devolver la etiqueta actualizada
     } catch (error: any) {
         res.status(400).json({ error: error.message });
     }
 }
-
 
 

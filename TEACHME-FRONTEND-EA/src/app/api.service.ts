@@ -3,6 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Usuario } from './models/usuario.model';
 import { Asignatura } from './models/asignatura.model';
+import { Etiqueta } from './models/etiqueta.model';
 
 @Injectable({
   providedIn: 'root'
@@ -86,4 +87,36 @@ export class ApiService {
   desasignarAsignatura(usuarioId: string, asignaturaId: string): Observable<any> {
     return this.http.delete(`${this.apiUrl}usuarios/${usuarioId}/asignaturas/${asignaturaId}`);
   }
+  // Función para obtener todas las etiquetas
+  getEtiquetas(): Observable<Etiqueta[]> {
+    return this.http.get<Etiqueta[]>(`${this.apiUrl}etiquetas`);
+  }
+
+  // Función para obtener etiquetas con populate
+  getEtiquetasPopulate(): Observable<Etiqueta[]> {
+    return this.http.get<Etiqueta[]>(`${this.apiUrl}etiquetas/populate`);
+  }
+
+  // Función para crear una nueva etiqueta
+  createEtiqueta(etiqueta: Etiqueta): Observable<Etiqueta> {
+    return this.http.post<Etiqueta>(`${this.apiUrl}etiquetas`, etiqueta);
+  }
+
+  // Función para actualizar etiqueta por id
+  updateEtiqueta(id: string, etiqueta: Etiqueta): Observable<Etiqueta> {
+    return this.http.put<Etiqueta>(`${this.apiUrl}etiquetas/${id}`, etiqueta);
+  }
+
+  // Función para eliminar etiqueta por id
+  deleteEtiqueta(id: string): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}etiquetas/${id}`);
+  }
+
+  // Función para asignar un usuario a una etiqueta
+  asignarUsuarioAEtiqueta(id: string, usuarioId: string): Observable<Etiqueta> {
+    return this.http.post<Etiqueta>(`${this.apiUrl}etiquetas/${id}/asignar-usuario`, { usuarioId });
+  }
 }
+
+
+

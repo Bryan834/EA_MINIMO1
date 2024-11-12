@@ -1,0 +1,75 @@
+<div class="home-container">
+    <h1>Gestión de Etiquetas</h1>
+    <p>Crea, asigna, edita y elimina etiquetas.</p>
+  
+    <!-- Formulario para Crear Nueva Etiqueta -->
+    <div class="form-container">
+      <h2>Crear Nueva Etiqueta</h2>
+      <form [formGroup]="etiquetaForm" (ngSubmit)="createEtiqueta()">
+        <label for="descripcion">Descripción:</label>
+        <input type="text" id="descripcion" formControlName="descripcion" placeholder="Descripción de la etiqueta" required />
+  
+        <label for="colorFav">Color Favorito:</label>
+        <input type="color" id="colorFav" formControlName="colorFav" />
+  
+        <button class="btn" type="submit" [disabled]="etiquetaForm.invalid">Crear Etiqueta</button>
+      </form>
+    </div>
+  
+    <!-- Formulario para Asignar Usuario a Etiqueta -->
+    <div class="form-container">
+      <h2>Asignar Usuario a Etiqueta</h2>
+      <form [formGroup]="asignarForm" (ngSubmit)="asignarUsuarioAEtiqueta()">
+        <label for="etiquetaId">ID de Etiqueta:</label>
+        <input type="text" id="etiquetaId" formControlName="etiquetaId" placeholder="ID de la etiqueta" required />
+  
+        <label for="usuarioId">ID de Usuario:</label>
+        <input type="text" id="usuarioId" formControlName="usuarioId" placeholder="ID del usuario" required />
+  
+        <button class="btn" type="submit" [disabled]="asignarForm.invalid">Asignar Usuario</button>
+      </form>
+    </div>
+  
+    <!-- Formulario para Editar una Etiqueta -->
+    <div *ngIf="editingEtiqueta" class="form-container">
+      <h2>Editar Etiqueta</h2>
+      <form [formGroup]="etiquetaEditForm" (ngSubmit)="updateEtiqueta()">
+        <label for="descripcionEdit">Descripción:</label>
+        <input type="text" id="descripcionEdit" formControlName="descripcion" placeholder="Descripción de la etiqueta" required />
+  
+        <label for="colorFavEdit">Color Favorito:</label>
+        <input type="color" id="colorFavEdit" formControlName="colorFav" />
+  
+        <button class="btn" type="submit" [disabled]="etiquetaEditForm.invalid">Actualizar Etiqueta</button>
+      </form>
+    </div>
+  
+    <!-- Formulario para Eliminar una Etiqueta -->
+    <div class="form-container">
+      <h2>Eliminar Etiqueta</h2>
+      <form [formGroup]="eliminarForm" (ngSubmit)="deleteEtiqueta()">
+        <label for="etiquetaEliminar">ID de la Etiqueta:</label>
+        <input type="text" id="etiquetaEliminar" formControlName="etiquetaId" placeholder="ID de la etiqueta a eliminar" required />
+  
+        <button class="btn" type="submit" [disabled]="eliminarForm.invalid">Eliminar Etiqueta</button>
+      </form>
+    </div>
+  
+    <!-- Lista de Etiquetas -->
+    <div class="etiquetas-list">
+      <h3>Lista de Etiquetas</h3>
+      <div *ngFor="let etiqueta of etiquetas" class="etiqueta-item">
+        <div class="etiqueta-details">
+          <p><strong>Descripción:</strong> {{ etiqueta.descripcion }}</p>
+          <p><strong>Color:</strong> <span [style.background]="etiqueta.colorFav" class="color-box"></span></p>
+        </div>
+  
+        <!-- Botones para las acciones del CRUD -->
+        <div class="etiqueta-actions">
+          <button class="btn" (click)="editEtiqueta(etiqueta)">Editar</button>
+          <button class="btn" (click)="deleteEtiqueta(etiqueta._id)">Eliminar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  

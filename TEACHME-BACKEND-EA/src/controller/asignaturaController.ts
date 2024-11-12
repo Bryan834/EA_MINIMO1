@@ -47,29 +47,29 @@ export async function verAsignaturaPorNombre(req: Request, res: Response) {
   }
 }
 
-//AÑADIR USUARIO A ASIGNATURA POR NOMBRE E ID
-export async function asignarUsuariosAAsignaturaPorNombre(req: Request, res: Response) {
-  try {
-    const { nombreAsignatura, nombresUsuarios } = req.body;
-    const asignatura = await asignaturaService.asignarUsuariosAAsignaturaPorNombre(nombreAsignatura, nombresUsuarios);
-    console.log(asignatura);
-    res.status(200).send().json(asignatura);
-  } catch (error: any) {
-    res.status(400).json({ error: error.message });
+  //AÑADIR USUARIO A ASIGNATURA POR NOMBRE E ID
+  export async function asignarUsuariosAAsignaturaPorNombre(req: Request, res: Response) {
+    try {
+      const { nombreAsignatura, nombresUsuarios } = req.body;
+      const asignatura = await asignaturaService.asignarUsuariosAAsignaturaPorNombre(nombreAsignatura, nombresUsuarios);
+      console.log(asignatura);
+      res.status(200).send().json(asignatura);
+    } catch (error: any) {
+      res.status(400).json({ error: error.message });
+    }
   }
-}
 
-export async function asignarUsuariosAAsignaturaPorId(req: Request, res: Response) {
-  try {
-    const { _id } = req.params;
-    const { nombresUsuarios } = req.body;
-    const asignatura = await asignaturaService.asignarUsuariosAAsignaturaPorId(_id, nombresUsuarios);
-    console.log(asignatura);
-    res.status(200).send().json(asignatura);
-  } catch (error: any) {
-    res.status(400).json({ error: error.message });
-  }
-} 
+  export async function asignarUsuariosAAsignaturaPorId(req: Request, res: Response) {
+    try {
+      const { _id } = req.params;
+      const { nombresUsuarios } = req.body;
+      const asignatura = await asignaturaService.asignarUsuariosAAsignaturaPorId(_id, nombresUsuarios);
+      console.log(asignatura);
+      res.status(200).send().json(asignatura);
+    } catch (error: any) {
+      res.status(400).json({ error: error.message });
+    }
+  } 
 //ELIMINAR ASIGNATURA DE LA BASE DE DATOS POR NOMBRE E ID
 export async function eliminarAsignaturaPorNombre(req: Request, res: Response) {
   try {

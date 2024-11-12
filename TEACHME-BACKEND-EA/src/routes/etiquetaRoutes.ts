@@ -1,34 +1,29 @@
 import { Router } from 'express';
-import * as etiquetaController from '../controller/etiquetaController';
+import { crearEtiqueta
+    , listarEtiquetas
+    , listarEtiquetasPopulate
+    , actualizarEtiquetaPorId
+    , actualizarEtiquetaPorNombre
+    , eliminarEtiquetaPorId
+    , eliminarEtiquetaPorNombre
+    , asignarUsuarioAEtiquetaPorId
+   
+ } from '../controller/etiquetaController';
 
 const router = Router();
 
-/*----------------------------- RUTAS GET -----------------------------*/
 
-router.get('/etiquetas', etiquetaController.listarEtiquetas);
+router.get('/',listarEtiquetas);
+router.get('/populate',listarEtiquetasPopulate);
 
+router.post('/', crearEtiqueta);
 
-router.get('/etiquetas/populate', etiquetaController.listarEtiquetasPopulate);
+router.put('/:id/usuario/:nombre', asignarUsuarioAEtiquetaPorId);
 
-/*----------------------------- RUTAS POST -----------------------------*/
+router.put('/:id', actualizarEtiquetaPorId);
+router.put('/nombre/:nombre', actualizarEtiquetaPorNombre);
 
-router.post('/etiquetas', etiquetaController.crearEtiqueta);
-
-
-router.post('/etiquetas/:_id/asignar-usuario', etiquetaController.asignarUsuarioAEtiquetaID);
-
-/*----------------------------- RUTAS PUT -----------------------------*/
-
-router.put('/etiquetas/:_id', etiquetaController.actualizarEtiquetaPorId);
-
-
-router.put('/etiquetas/nombre/:nombre', etiquetaController.actualizarEtiquetaPorNombre);
-
-/*----------------------------- RUTAS DELETE -----------------------------*/
-
-router.delete('/etiquetas/:_id', etiquetaController.eliminarEtiquetaPorId);
-
-
-router.delete('/etiquetas/nombre/:nombre', etiquetaController.eliminarEtiquetaPorNombre);
+router.delete('/:id', eliminarEtiquetaPorId);
+router.delete('/nombre/:nombre', eliminarEtiquetaPorNombre);
 
 export default router;
