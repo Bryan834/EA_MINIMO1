@@ -64,7 +64,6 @@ export const asignarAsignaturasAUsuario = async (nombre: string, asignaturas: st
   }
 
   const asignaturasEncontradas = await Asignatura.find({ nombre: { $in: asignaturas } });
-  //algo de control de errores no viene mal xd
   if (asignaturasEncontradas.length !== asignaturas.length) {
     throw new Error('Algunas asignaturas no fueron encontradas');
   }
